@@ -1,0 +1,27 @@
+﻿@model ItBlog.Models.Article
+
+@{ 
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure, you want to delete the Article</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Name</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
+        <dt>Short Description</dt>
+        <dd>@Html.DisplayFor(model => model.ShortDescription)</dd>
+        <dt>Full Description</dt>
+        <dd>@Html.DisplayFor(model => model.FullDescription)</dd>
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div>
+            <input type="submit" value="Delete" class="btn btn-default" />
+           @Html.ActionLink("Go to Articles" ,"MyArticles");
+        </div>
+    }
+</div>

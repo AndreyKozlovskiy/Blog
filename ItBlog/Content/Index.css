@@ -1,0 +1,11 @@
+.body-content{
+height: auto;
+display: table;
+
+}
+.article_items{
+    
+    width: 80%;
+   height: auto;
+   min-height: 100%;
+}

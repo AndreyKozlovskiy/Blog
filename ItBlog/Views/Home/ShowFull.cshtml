@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Article.Name</title>
+</head>
+<body>
+    <div>
+        <p>@ViewBag.Article.ArticleId</p>
+        <p>@ViewBag.Article.Name</p>
+        <p>@ViewBag.Article.FullDescription</p>
+        <p>@ViewBag.Article.UserMail</p>
+        <p>@ViewBag.Article.Time.ToUniversalTime()</p>
+
+        @if (ViewBag.Article.UserMail == User.Identity.Name)
+        {
+
+            <p><a href="/Home/EditArticle?id=@ViewBag.Article.ArticleId">Edit</a></p>
+            <p><a href="/Home/DeleteArticle?id=@ViewBag.Article.ArticleId">Delete</a></p>
+        }
+        <p><a href="/Home">Назад</a></p>
+    </div>
+</body>
+</html>
