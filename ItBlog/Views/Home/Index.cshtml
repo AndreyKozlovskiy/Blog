@@ -29,27 +29,32 @@
             @foreach (var b in ViewBag.Articles)
             {
 
-                <div class="on_item">
-                    <div class="in_item">
-                        <div class="box_item name"><span> @b.Name </span></div>
-                        <div class="box_item description"><span> @b.ShortDescription </span></div>
-                        <div class="box_item category"><span> @b.Category </span></div>
-                        <div class="box_item usermail"><span> @b.UserMail </span> </div>
-                        <div class="box_item time"><span> @b.Time.ToUniversalTime() </span> </div>
-                        <div class="box_item tags"><span> @b.Tags  </span></div>
-                        <div class="box_item show"><a href="/Home/ShowFull?id=@b.ArticleId">Show</a></div>
-                        @if (b.ImagePath != null)
-                        {
-                        <div> <img src="@b.ImagePath" style="max-width:200px" /></div>
-                        }
-                        @if (b.UserMail == User.Identity.Name)
-                        {
-
-                            <div class="box_item edit"><a href="/Home/EditArticle?id=@b.ArticleId">Edit</a></div>
-                            <div class="box_item delete"><a href="/Home/DeleteArticle?id=@b.ArticleId">Delete</a></div>
-                        }
+            <div class="on_item">
+                <div class="in_item">
+                    <div class="box_upper">
+                        <div class="box_item category">
+                            <span> @b.Category </span>
+                            @if (b.UserMail == User.Identity.Name)
+                            {
+                                <div class="box_item delete"><a href="/Home/DeleteArticle?id=@b.ArticleId"><img src="~/Content/img/icons8-delete.svg" /></a></div>
+                            }
+                        </div>
                     </div>
+                    <div class="box_item name"><span> @b.Name </span></div>
+                    <div class="box_item description"><span> @b.ShortDescription </span></div>
+
+                    <div class="box_item usermail"><span> @b.UserMail </span> </div>
+                    <div class="box_item time"><span> @b.Time.ToUniversalTime() </span> </div>
+                    <div class="box_item tags"><span> @b.Tags  </span></div>
+
+                    @if (b.UserMail == User.Identity.Name)
+                    {
+
+                        <div class="box_item edit"><a href="/Home/EditArticle?id=@b.ArticleId">Edit</a></div>
+                    }
+                    <div class="box_item show"><a href="/Home/ShowFull?id=@b.ArticleId">Show</a></div>
                 </div>
+            </div>
 
             }
         </div>

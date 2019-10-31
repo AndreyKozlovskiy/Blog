@@ -1,25 +1,25 @@
 ﻿<!DOCTYPE html>
 <html style="height:auto">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://fonts.googleapis.com/css?family=PT+Mono&display=swap&subset=cyrillic" rel="stylesheet">
     <title>IT-BLOG</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
-<body style="height:auto">
+<body>
     <div class="navbar">
         <div class="container">
             <div class="navbar-header"><h1>@Html.ActionLink("It-Blog", "Index", "Home")</h1></div>
             <div class="navbar-collapse">
                 <ul class="nav_ul">
-                    <li>@Html.ActionLink("Home Page", "Index", "Home")</li>
-                    <li>@Html.ActionLink("My articles", "MyArticles", "Home")</li>
-                    <li>@Html.ActionLink("Information", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contacts", "Contact", "Home")</li>
+                    <li class="li-action">@Html.ActionLink("Home Page", "Index", "Home")</li>
+                    <li class="li-action">@Html.ActionLink("My articles", "MyArticles", "Home")</li>
+                    <li class="li-action">@Html.ActionLink("Information", "About", "Home")</li>
+                    <li class="li-action">@Html.ActionLink("Contacts", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -32,7 +32,6 @@
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    
     @RenderSection("scripts", required: false)
     <script src="~/Scripts/main_script.js"></script>
 

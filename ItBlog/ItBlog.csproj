@@ -208,10 +208,20 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\About.css" />
+    <Content Include="Content\AddArticle.css" />
+    <Content Include="Content\article.css" />
     <Content Include="Content\ArticlePictures\img2.png" />
     <Content Include="Content\ArticlePictures\img1.png" />
+    <Content Include="Content\DeleteArticle.css" />
+    <Content Include="Content\EditArticle.css" />
     <Content Include="Content\img\iconmonstr-magnifier-1.svg" />
-    <Content Include="Content\main.css" />
+    <Content Include="Content\img\icons8-delete.svg" />
+    <Content Include="Content\Index.css" />
+    <Content Include="Content\Layout.css" />
+    <Content Include="Content\MyArticles.css" />
+    <Content Include="Content\reset.css" />
+    <Content Include="Content\ShowFull.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
