@@ -1,17 +1,13 @@
 ﻿@model ItBlog.Models.IndexViewModel
-@{
-    ViewBag.Title = "Управление";
-}
 
 <h2>@ViewBag.Title.</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
-<div>
-    <h4>Изменение параметров учетной записи</h4>
-    <hr />
+<div class="manage">
+    <div class="manage-head">Изменение параметров учетной записи</div>
     <dl class="dl-horizontal">
-        <dt>Пароль:</dt>
-        <dd>
+        <dt class="manage-head">Пароль:</dt>
+        <dd class="manage-text">
             [
             @if (Model.HasPassword)
             {
@@ -23,8 +19,8 @@
             }
             ]
         </dd>
-        <dt>Внешние имена входа:</dt>
-        <dd>
+        <dt class="manage-head">Внешние имена входа:</dt>
+        <dd class="manage-text">
             @Model.Logins.Count [
             @Html.ActionLink("Управление", "ManageLogins") ]
         </dd>
@@ -56,8 +52,8 @@
                 }
             </dd>
         *@
-        <dt>Двухфакторная проверка подлинности:</dt>
-        <dd>
+        <dt class="manage-head">Двухфакторная проверка подлинности:</dt>
+        <dd class="manage-upper">
             <p>
                 Поставщики двухфакторной проверки подлинности не настроены. В <a href="https://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
                 можно узнать, как настроить двухфакторную проверку подлинности для этого приложения ASP.NET.

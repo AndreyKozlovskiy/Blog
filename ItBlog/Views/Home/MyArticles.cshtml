@@ -2,20 +2,39 @@
     ViewBag.Title = "My articles";
 }
 
-    <div>
-        <p><a href="/Home/AddArticle">Add article</a></p>
-        <table>
+    <div class="my-articles">
+        <div class="box_add">
+            <a class="button_add" href="/Home/AddArticle"><span> Add article</span></a>
+        </div>
+        <div class="items">
             @foreach (var b in ViewBag.Articles)
             {
-                <tr>
-                    <td> @b.Name</td>
-                    <td> @b.ShortDescription</td>
-                    <td> @b.Time.ToUniversalTime()  </td>
-                    <td> @b.Category</td>
-                    <td><a href="/Home/ShowFull?id=@b.ArticleId">Show</a></td>
-                    <td><a href="/Home/EditArticle?id=@b.ArticleId">Edit</a></td>
-                    <td><a href="/Home/DeleteArticle?id=@b.ArticleId">Delete</a></td>
-                </tr>
+                <div class="on_item">
+                    <div class="in_item">
+                        <div class="box_upper">
+                            <div class="box_item category">
+                                <span> @b.Category </span>
+                                @if (b.UserMail == User.Identity.Name)
+                                {
+                                    <div class="box_item delete"><a href="/Home/DeleteArticle?id=@b.ArticleId"><img src="~/Content/img/icons8-delete.svg" /></a></div>
+                                }
+                            </div>
+                        </div>
+                        <div class="box_item name"><span> @b.Name </span></div>
+                        <div class="box_item description"><span> @b.ShortDescription </span></div>
+
+                        <div class="box_item usermail"><span> @b.UserMail </span> </div>
+                        <div class="box_item time"><span> @b.Time.ToUniversalTime() </span> </div>
+                        <div class="box_item tags"><span> @b.Tags  </span></div>
+
+                        @if (b.UserMail == User.Identity.Name)
+                        {
+
+                            <div class="box_item edit"><a href="/Home/EditArticle?id=@b.ArticleId">Edit</a></div>
+                        }
+                        <div class="box_item show"><a href="/Home/ShowFull?id=@b.ArticleId">Show</a></div>
+                    </div>
+                </div>
             }
-        </table>
-    </div>
+            </div>
+        </div>

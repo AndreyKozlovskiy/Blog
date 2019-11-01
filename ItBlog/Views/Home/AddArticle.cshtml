@@ -1,34 +1,39 @@
 ﻿@model ItBlog.Models.AddArticleViewModel
-<h2>Create article</h2>
 
-<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Post">
-    <div class="item">
-        <label> Name </label>
-        <input id="Name" name="Name" type="text" required />
-    </div>
-    <div class="item">
-        <label>Short Description</label>
-        @Html.TextBoxFor(m => m.ShortDescription);
-    </div>
-    <div class="item">
-        <label>Full Description</label>
-        <input id="FullDescription" name="FullDescription" type="text" required />
-    </div>
-    <div class="item">
-        <label>Tags(Separator ' ')</label>
-        @Html.TextBoxFor(m => m.Tags);
-    </div>
-    <div class="item">
-        @Html.TextBox("Photo","",new { type ="File"})
-    </div>
-    <div>
-        <label>Category</label>
-        <select id="Category" name="Category">
-            <option>C/C++</option>
-            <option>C#</option>
-            <option>Python</option>
-            <option>Java</option>
-        </select>
-    </div>
-    <input type="submit" value="Create" />
-</form>
+<div class="form-add_article">
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Post" class="article-add">
+        <h2 class="head-text">Create article</h2>
+        <div class="item_formadd">
+            <label > Name </label>
+            <input id="Name" name="Name" type="text" required class="form_input" />
+        </div>
+        <div class="item_formadd">
+            <label>Short Description</label>
+            @Html.TextBoxFor(m => m.ShortDescription)
+        </div>
+        <div class="item_formadd">
+            <label>Full Description</label>
+            <input id="FullDescription" name="FullDescription" type="text" required class="form_input" />
+        </div>
+        <div class="item_formadd">
+            <label>Tags(Separator ' ')</label>
+            @Html.TextBoxFor(m => m.Tags)
+        </div>
+        <div class=" item_result">
+            <div class="item_formadd">
+
+               <input id="Photo" name="Photo" type="File" value="" accept=".png,.jpg,.jpeg" class="input_file">
+            </div>
+            <div>
+                <label>Category</label>
+                <select id="Category" name="Category">
+                    <option>C/C++</option>
+                    <option>C#</option>
+                    <option>Python</option>
+                    <option>Java</option>
+                </select>
+            </div>
+            <input type="submit" value="Create" />
+        </div>
+    </form>
+</div>

@@ -5,20 +5,29 @@
     <title>@ViewBag.Article.Name</title>
 </head>
 <body>
-    <div>
-        <p>@ViewBag.Article.ArticleId</p>
-        <p>@ViewBag.Article.Name</p>
-        <p>@ViewBag.Article.FullDescription</p>
-        <p>@ViewBag.Article.UserMail</p>
-        <p>@ViewBag.Article.Time.ToUniversalTime()</p>
+ 
+        <div class="on_item full">
+            <div class="in_item">
+                <div class="box_upper">
+                    <div class="box_item category full">
+                            <div class="box_item delete"><a href="/Home/DeleteArticle?id=@ViewBag.Article.ArticleId"><img src="~/Content/img/icons8-delete.svg" /></a></div>
+                        
+                    </div>
+                </div>
+                <div class="box_item name"><span> @ViewBag.Article.Name </span></div>
+                <div class="box_item description"><span> @ViewBag.Article.FullDescription </span></div>
 
-        @if (ViewBag.Article.UserMail == User.Identity.Name)
-        {
+                <div class="box_item usermail"><span> @ViewBag.Article.UserMail </span> </div>
+                <div class="box_item time"><span> @ViewBag.Article.Time.ToUniversalTime() </span> </div>
+                <div class="box_item tags"><span> @ViewBag.Tags  </span></div>
 
-            <p><a href="/Home/EditArticle?id=@ViewBag.Article.ArticleId">Edit</a></p>
-            <p><a href="/Home/DeleteArticle?id=@ViewBag.Article.ArticleId">Delete</a></p>
-        }
+                
+                    <div class="box_item edit"><a href="/Home/EditArticle?id=@ViewBag.Article.ArticleId">Edit</a></div>
+               
+                <div class="box_item show"><a href="/Home/ShowFull?id=@ViewBag.Article.ArticleId">Show</a></div>
+            </div>
+        </div>
         <p><a href="/Home">Назад</a></p>
-    </div>
+
 </body>
 </html>
