@@ -4,18 +4,17 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="manage">
-    <div class="manage-head">Изменение параметров учетной записи</div>
+    <div class="manage-head">Change Account Settings</div>
     <dl class="dl-horizontal">
-        <dt class="manage-head">Пароль:</dt>
         <dd class="manage-text">
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Смена пароля", "ChangePassword")
+                @Html.ActionLink("Change Password", "ChangePassword")
             }
             else
             {
-                @Html.ActionLink("Создать", "SetPassword")
+                @Html.ActionLink("Create Password", "SetPassword")
             }
             ]
         </dd>
@@ -46,14 +45,7 @@
                     <text>[&nbsp;&nbsp;@Html.ActionLink("Add", "AddPhoneNumber")
                 }
             </dd>
-        *@
-        <dt class="manage-head">Двухфакторная проверка подлинности:</dt>
-        <dd class="manage-upper">
-            <p>
-                Поставщики двухфакторной проверки подлинности не настроены. В <a href="https://go.microsoft.com/fwlink/?LinkId=403804">этой статье</a>
-                можно узнать, как настроить двухфакторную проверку подлинности для этого приложения ASP.NET.
-            </p>
-            @*@if (Model.TwoFactor)
+            if (Model.TwoFactor)
                 {
                     using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {

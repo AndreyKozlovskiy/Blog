@@ -20,7 +20,8 @@ namespace ItBlog.Models
         public string ShortDescription { get; set; }
         public string UserMail { get; set; }
         public string Tags { get; set; }
-        public string ImagePath { get; set; }
+        public Picture Picture { get; set; }
+        public List<Comment> Comments { get; set; }
 
     }
 }

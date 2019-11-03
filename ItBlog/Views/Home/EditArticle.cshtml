@@ -2,16 +2,17 @@
     ViewBag.Title = "Edit article";
 }
 @model ItBlog.Models.Article
-<h2>Cтатья № @Model.ArticleId</h2>
+<h2 style="color:aliceblue">Cтатья № @Model.ArticleId</h2>
 @using (Html.BeginForm("EditArticle", "Home", FormMethod.Post))
 {
-<fieldset>
+<fieldset style="color:aliceblue">
     @Html.HiddenFor(m => m.ArticleId)
     <p>
         @Html.LabelFor(m => m.Name, "Name")
         <br />
         @Html.EditorFor(m => m.Name)
     </p>
+    <p>@Html.LabelFor(m=>m.Category,"Категория")</p>
     <p>
         <select id="Category" name="Category">
             <option>C/C++</option>

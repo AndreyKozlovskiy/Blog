@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -28,8 +29,13 @@ namespace ItBlog.Controllers
                 var art = new List<Article>();
                 foreach(Article b in db.Articles)
                 {
-                    if (b.Tags.Contains(searchString) && b.Time>fromDate && b.Time<forDate)
-                        art.Add(b);
+                    if (!String.IsNullOrEmpty(b.Tags))
+                    {
+                        if (b.Tags.Contains(searchString) && b.Time > fromDate && b.Time < forDate)
+                        {
+                            art.Add(b);
+                        }
+                    }
                 }
                 ViewBag.Articles = art;
                 return View();
@@ -39,8 +45,13 @@ namespace ItBlog.Controllers
                 var art = new List<Article>();
                 foreach (Article b in db.Articles)
                 {
-                    if (b.Tags.Contains(searchString) && articleCat==b.Category && b.Time > fromDate && b.Time < forDate)
-                        art.Add(b);
+                    if(!String.IsNullOrEmpty(b.Tags))
+                    {
+                        if (b.Tags.Contains(searchString) && articleCat == b.Category && b.Time > fromDate && b.Time < forDate)
+                        {
+                            art.Add(b);
+                        }
+                    }
                 }
                 ViewBag.Articles = art;
                 return View();
@@ -136,30 +147,25 @@ namespace ItBlog.Controllers
 
         [HttpPost]
         [Authorize]
-        public RedirectResult AddArticle(AddArticleViewModel model,HttpPostedFileBase Photo)
+        public ActionResult AddArticle(AddArticleViewModel model,HttpPostedFileBase Photo)
         {
-            string FolderPath = null;
-            if (Photo!=null)
+            byte[] imageDate = null;
+            if (Photo != null)
             {
-                string ImageFileName = Path.GetFileName(Photo.FileName);
-                FolderPath = Path.Combine(Server.MapPath("~/Content/ArticlePictures/"), ImageFileName);
-                Photo.SaveAs(FolderPath);
+                using (var binaryReader = new BinaryReader(Photo.InputStream))
+                {
+                    imageDate = binaryReader.ReadBytes(Photo.ContentLength);
+                }
             }
-            Article article = new Article()
-            {
-                Name = model.Name,
-                Tags = model.Tags,
-                FullDescription = model.FullDescription,
-                Category = model.Category,
-                ShortDescription = model.ShortDescription
-            };
-            article.ImagePath = FolderPath;
+            Article article = new Article() { Name=model.Name,FullDescription=model.FullDescription,Tags=model.Tags,ShortDescription=model.ShortDescription,Category=model.Category};
+            article.Picture = new Picture() { Name= Convert.ToString(article.ArticleId) ,Image= imageDate ,Id=article.ArticleId};
             article.Time = DateTime.Now;
             article.UserMail = User.Identity.Name;
             db.Articles.Add(article);
             db.SaveChanges();
             return YourArticle(article);
         }
+        [HttpGet]
         public ActionResult ShowFull(int id)
         {
             Article article = db.Articles.Find(id);
@@ -169,6 +175,28 @@ namespace ItBlog.Controllers
             }
             ViewBag.Article = article;
             return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public RedirectResult ShowFull(string textOfComment, int articleid)
+        {
+            Comment comment = new Comment() { Author = User.Identity.Name, Time = DateTime.Now, TextOfComment = textOfComment };
+            Article articl = db.Articles.Find(articleid);
+            if (articl != null)
+            {
+                if (articl.Comments == null)
+                {
+                    articl.Comments = new List<Comment>() { comment };
+                }
+                else
+                {
+                    articl.Comments.Add(comment);
+                }
+            }
+            db.Entry(articl).State = EntityState.Modified;
+            db.SaveChanges();
+            return Redirect($"ShowFull?id={articl.ArticleId}");
         }
         public ActionResult About()
         {

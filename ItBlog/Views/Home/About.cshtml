@@ -1,54 +1,51 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<div class="about-me">
-    <div class="about-me-item">
-        <span class="about_head">
-            Функциональные возможности:<br />
-        </span>
-        <span class="about-text">
-            ASP.NET MVC приложение, позволяющее создавать, редактировать и просматривать статьи.<br />
-            Контент-редакторы - авторизированные пользователи – вход осуществляется по почте и паролю (для аутентификации/авторизации использовался стандартный ASP.NET Identity).<br />
-            Контент-редакторы могут выполнять следующие операции:<br />
-            - Создавать, редактировать и удалять статьи (Article)<br />
-            - Добавлять и удалять теги для статей (Tags)<br />
-            - Имеют весь функционал обычных пользователей
-        </span>
-    </div>
-    <div class="about-me-item">
-
-        <span class="about_head">
-            Обычные пользователи – не авторизированные пользователи – не требуют аутентификации.<br />
-        </span>
-        <span class="about-text">
-            Обычные пользователи могут выполнять следующие операции:<br />
-            - Просматривать список статей<br />
-            - Просматривать конкретную статью<br />
-            - Фильтровать статьи по категориям (у каждой статьи может быть только одна категория)<br />
-            - Фильтровать статьи по датам (например, статьи, опубликованные с даты X по дату Y)<br />
-            - Фильтровать статьи по тегу
-        </span>
-    </div>
-    <div class="about-me-item">
-        <span class="about_head">
-            Статья должна имеen следующие поля:<br />
-        </span>
-        <span class="about-text">
-            - Название (Name) – поле обязательное<br />
-            - Краткое описание (Short Description) – поле не обязательное<br />
-            - Текст статьи (Description) – поле обязательное<br />
-            - Категория (Category) – поле обязательное<br />
-            - Теги (Tags) – поле не обязательное
+    <div class="about-me">
+        <div class="about-me-item">
+            <span class="about_head">
+                Functionality: <br />
             </span>
-    </div>
-    <div class="about-me-item">
-        <span class="about-text">
-            Страница со списком статей (Articles List) содержит сам список статей
-            (название, категория, краткое описание, тэги), фильтры (по категории, датам, тегу).<br />
-            Страница конкретной статьи (Article Details) содержит название, текст статьи, категорию и теги (если заданы)
+            <span class="about-text">
+                ASP.NET MVC application that allows you to create, edit and view articles. <br />
+                Content editors - authorized users - login by mail and password (standard ASP.NET Identity was used for authentication / authorization). <br />
+                Content editors can perform the following operations: <br />
+                - Create, edit and delete articles (Article) <br />
+                - Add and remove tags for articles (Tags) <br />
+                - Have all the functionality of ordinary users
             </span>
-</div>
-</div>
+        </div>
+        <div class="about-me-item">
+
+            <span class="about_head">
+                Ordinary users - unauthorized users - do not require authentication. <br />
+            </span>
+            <span class="about-text">
+                Ordinary users can perform the following operations: <br />
+                - View a list of articles <br />
+                - View a specific article <br />
+                - Filter articles by category (each article can only have one category) <br />
+                - Filter articles by date (for example, articles published from date X to date Y) <br />
+                - Filter articles by tag
+            </span>
+        </div>
+        <div class="about-me-item">
+            <span class="about_head">
+                The article must have the following fields: <br />
+            </span>
+            <span class="about-text">
+                - Name (Name) - required field <br />
+                - Short Description (Short Description) - optional field <br />
+                - Text of the article (Description) - required field <br />
+                - Category (Category) - required field <br />
+                - Tags (Tags) - optional field
+            </span>
+        </div>
+        <div class="about-me-item">
+            <span class="about-text">
+                The Article List page contains the list of articles
+                (name, category, short description, tags), filters (by category, date, tag). <br />
+                The page for a specific article (Article Details) contains the title, article text, category and tags (if specified)
+            </span>
+        </div>
+    </div>
