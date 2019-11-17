@@ -1,0 +1,15 @@
+﻿
+@model ItBlog.Models.Tag
+
+<div class="form-add_tag">
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Post" class="tag-add">
+        <h2 class="head-text">Create new tag</h2>
+        <div>
+        <div class="item_formadd">
+            <label>Tag</label>
+            @Html.TextBoxFor(m => m.TagName)
+        </div>
+            <input type="submit" value="Create" />
+        </div>
+    </form>
+</div>

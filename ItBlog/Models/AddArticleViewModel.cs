@@ -17,10 +17,11 @@ namespace ItBlog.Models
         public string FullDescription { get; set; }
         [Required]
         public string Category { get; set; }
+        public IQueryable<Category> CategoryList { get; set; }
         public DateTime Time { get; set; }
         [MaxLength(100, ErrorMessage = "Max 100 characters")]
         public string ShortDescription { get; set; }
         public string UserMail { get; set; }
-        public string Tags { get; set; }
+        public List<string> Tags { get; set; }
     }
 }

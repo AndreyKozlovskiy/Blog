@@ -8,10 +8,8 @@
         <p class="form-text"> Category:</p>
             <select id="articleCat" name="articleCat" class="form_input" >
                 <option>All</option>
-                <option>C#</option>
-                <option>C/C++</option>
-                <option>Python</option>
-                <option>Java</option>
+                @foreach(var b in ViewBag.Categories)
+                {<option>@b.CategoryName</option> }
             </select>
             <p class="form-text"> Tag:</p> 
             <input class="form_input" type="text" name="SearchString">

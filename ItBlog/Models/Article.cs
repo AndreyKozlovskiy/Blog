@@ -22,6 +22,5 @@ namespace ItBlog.Models
         public string Tags { get; set; }
         public Picture Picture { get; set; }
         public List<Comment> Comments { get; set; }
-
     }
 }

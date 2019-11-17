@@ -1,85 +1,25 @@
-﻿using ItBlog.Models;
+﻿using ItBlog.ControllerLogic;
+using ItBlog.Models;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Validation;
-using System.IO;
 using System.Linq;
-using System.Web.Mvc;
 using System.Web;
-using System.Threading.Tasks;
-using System.Drawing;
-using Microsoft.AspNetCore.Http;
+using System.Web.Mvc;
 
 namespace ItBlog.Controllers
 {
     public class HomeController : Controller
     {
-        BlogContext db = new BlogContext();
- 
-        
-        public ActionResult Index(string articleCat, string searchString,DateTime? fromDate,DateTime? forDate)
+        public ActionResult Index(string articleCat, string searchString, DateTime? fromDate, DateTime? forDate)
         {
-            if (fromDate == null)
-                fromDate = new DateTime(2019, 1, 1);
-            if (forDate == null)
-                forDate = new DateTime(2080, 1, 1);
-            if (!String.IsNullOrEmpty(searchString) && articleCat=="All")
-            {
-                var art = new List<Article>();
-                foreach(Article b in db.Articles)
-                {
-                    if (!String.IsNullOrEmpty(b.Tags))
-                    {
-                        if (b.Tags.Contains(searchString) && b.Time > fromDate && b.Time < forDate)
-                        {
-                            art.Add(b);
-                        }
-                    }
-                }
-                ViewBag.Articles = art;
-                return View();
-            }
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                var art = new List<Article>();
-                foreach (Article b in db.Articles)
-                {
-                    if(!String.IsNullOrEmpty(b.Tags))
-                    {
-                        if (b.Tags.Contains(searchString) && articleCat == b.Category && b.Time > fromDate && b.Time < forDate)
-                        {
-                            art.Add(b);
-                        }
-                    }
-                }
-                ViewBag.Articles = art;
-                return View();
-            }
-            if (articleCat!="All" && articleCat!=null)
-            {
-                var art = new List<Article>();
-                foreach (Article b in db.Articles)
-                {
-                    if (articleCat == b.Category && b.Time > fromDate && b.Time < forDate)
-                        art.Add(b);
-                }
-                ViewBag.Articles = art;
-                return View();
-            }
-            var article = new List<Article>();
-            foreach (Article b in db.Articles)
-            {
-                
-                if (b.Time > fromDate && b.Time < forDate)
-                    article.Add(b);
-            }
-            ViewBag.Articles = article;
+            BlogContext db=DbLogic.GetDB();
+            ViewBag.Categories = DbLogic.GetCategories(db);
+            ViewBag.Articles = StartPageLogic.Search(articleCat,searchString,fromDate,forDate);
             return View();
         }
+
         public ActionResult DeleteArticle(int? id)
         {
-            Article article = db.Articles.Find(id);
+            Article article = DbLogic.GetArticle(id);
             if(article==null)
             {
                 return Redirect("MyArticles");
@@ -90,29 +30,19 @@ namespace ItBlog.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Article article = db.Articles.Find(id);
-            db.Articles.Remove(article);
-            db.SaveChanges();
+            DbLogic.DeleteArticle(id);
             return Redirect("MyArticles");
         }
 
         [Authorize]
         public ActionResult MyArticles()
         {
-            List<Article> yourArticles = new List<Article>();
-            foreach(var b in db.Articles)
-            {
-                if(b.UserMail==User.Identity.Name)
-                {
-                    yourArticles.Add(b);
-                }
-            }
-            ViewBag.Articles = yourArticles;
+            ViewBag.Articles = DbLogic.GetArticlesOfUser(User.Identity.Name);
             return View();
         }
-        public RedirectResult YourArticle(Article article)
+        public RedirectResult YourArticle(int articleId)
         {
-            return Redirect($"/Home/ShowFull?id={article.ArticleId}");
+            return Redirect($"/Home/ShowFull?id={articleId}");
         }
         [HttpGet]
         [Authorize]
@@ -122,7 +52,7 @@ namespace ItBlog.Controllers
             {
                 return HttpNotFound();
             }
-            Article article = db.Articles.Find(id);
+            Article article = DbLogic.GetArticle(id);
             if (article != null)
             {
                 return View(article);
@@ -132,43 +62,32 @@ namespace ItBlog.Controllers
         [HttpPost]
         [Authorize]
         public RedirectResult EditArticle(Article article)
-        {
-            article.Time = DateTime.Now;
-            article.UserMail = User.Identity.Name;
-            db.Entry(article).State = EntityState.Modified;
-            db.SaveChanges();
-            return YourArticle(article);
+        { 
+            int articleId=EditArticleLogic.EditArticle(article, User.Identity.Name);
+            return Redirect($"ShowFull?id={articleId}");
         }
         [Authorize]
+        [HttpGet]
         public ActionResult AddArticle()
         {
-            return View();
+            AddArticleViewModel a = new AddArticleViewModel();
+            BlogContext blogContext = DbLogic.GetDB();
+            a.CategoryList = DbLogic.GetCategories(blogContext) ;
+            a.TagsList = DbLogic.GetTags(blogContext).ToList<Tag>();
+            return View(a);
         }
 
         [HttpPost]
         [Authorize]
         public ActionResult AddArticle(AddArticleViewModel model,HttpPostedFileBase Photo)
         {
-            byte[] imageDate = null;
-            if (Photo != null)
-            {
-                using (var binaryReader = new BinaryReader(Photo.InputStream))
-                {
-                    imageDate = binaryReader.ReadBytes(Photo.ContentLength);
-                }
-            }
-            Article article = new Article() { Name=model.Name,FullDescription=model.FullDescription,Tags=model.Tags,ShortDescription=model.ShortDescription,Category=model.Category};
-            article.Picture = new Picture() { Name= Convert.ToString(article.ArticleId) ,Image= imageDate ,Id=article.ArticleId};
-            article.Time = DateTime.Now;
-            article.UserMail = User.Identity.Name;
-            db.Articles.Add(article);
-            db.SaveChanges();
-            return YourArticle(article);
+            int articleId=AddArticleLogic.AddArticle(model, Photo, User.Identity.Name);
+            return Redirect($"ShowFull?id={articleId}");
         }
         [HttpGet]
         public ActionResult ShowFull(int id)
         {
-            Article article = db.Articles.Find(id);
+            Article article = DbLogic.GetArticle(id);
             if(article==null)
             {
                 return HttpNotFound();
@@ -179,24 +98,10 @@ namespace ItBlog.Controllers
 
         [HttpPost]
         [Authorize]
-        public RedirectResult ShowFull(string textOfComment, int articleid)
+        public RedirectResult ShowFull(string textOfComment, int articleId)
         {
-            Comment comment = new Comment() { Author = User.Identity.Name, Time = DateTime.Now, TextOfComment = textOfComment };
-            Article articl = db.Articles.Find(articleid);
-            if (articl != null)
-            {
-                if (articl.Comments == null)
-                {
-                    articl.Comments = new List<Comment>() { comment };
-                }
-                else
-                {
-                    articl.Comments.Add(comment);
-                }
-            }
-            db.Entry(articl).State = EntityState.Modified;
-            db.SaveChanges();
-            return Redirect($"ShowFull?id={articl.ArticleId}");
+            AddCommentLogic.AddComment(textOfComment, articleId, User.Identity.Name);
+            return Redirect($"ShowFull?id={articleId}");
         }
         public ActionResult About()
         {

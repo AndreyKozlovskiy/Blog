@@ -52,6 +52,7 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.3.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -191,6 +192,11 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="ControllerLogic\AddArticleLogic.cs" />
+    <Compile Include="ControllerLogic\AddCommentLogic.cs" />
+    <Compile Include="ControllerLogic\DbLogic.cs" />
+    <Compile Include="ControllerLogic\EditArticleLogic.cs" />
+    <Compile Include="ControllerLogic\StartPageLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -202,10 +208,12 @@
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\ArticleCategoryViewModel.cs" />
     <Compile Include="Models\BlogContext.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\Tag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -283,6 +291,7 @@
     <Content Include="Views\Home\MyArticles.cshtml" />
     <Content Include="Views\Home\EditArticle.cshtml" />
     <Content Include="Views\Home\DeleteArticle.cshtml" />
+    <Content Include="Views\Home\AddTag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

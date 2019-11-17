@@ -16,8 +16,12 @@
             <input id="FullDescription" name="FullDescription" type="text" required class="form_input" />
         </div>
         <div class="item_formadd">
-            <label>Tags(Separator ' ')</label>
-            @Html.TextBoxFor(m => m.Tags)
+            <select id="TagsList" name="TagsList">
+            @foreach (var i in Model.TagsList)
+            {
+                <option>@i.TagName</option>
+            }
+            </select>
         </div>
         <div class=" item_result">
             <div class="item_formadd">
@@ -27,10 +31,8 @@
             <div>
                 <label>Category</label>
                 <select id="Category" name="Category">
-                    <option>C/C++</option>
-                    <option>C#</option>
-                    <option>Python</option>
-                    <option>Java</option>
+                    @foreach (var i in Model.CategoryList)
+                    { <option>@i.CategoryName</option>}
                 </select>
             </div>
             <input type="submit" value="Create" />
