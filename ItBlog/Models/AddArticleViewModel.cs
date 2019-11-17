@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Http;
+using System.Linq;
 
 namespace ItBlog.Models
 {
@@ -22,6 +20,7 @@ namespace ItBlog.Models
         [MaxLength(100, ErrorMessage = "Max 100 characters")]
         public string ShortDescription { get; set; }
         public string UserMail { get; set; }
+        public List<Tag> TagsList { get; set; }
         public List<string> Tags { get; set; }
     }
 }

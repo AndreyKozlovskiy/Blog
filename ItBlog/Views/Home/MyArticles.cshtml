@@ -14,10 +14,8 @@
                         <div class="box_upper">
                             <div class="box_item category">
                                 <span> @b.Category </span>
-                                @if (b.UserMail == User.Identity.Name)
-                                {
                                     <div class="box_item delete"><a href="/Home/DeleteArticle?id=@b.ArticleId"><img src="~/Content/img/icons8-delete.svg" /></a></div>
-                                }
+                                
                             </div>
                         </div>
                         <div class="box_item name"><span> @b.Name </span></div>

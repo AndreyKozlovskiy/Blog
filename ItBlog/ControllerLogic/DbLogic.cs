@@ -1,12 +1,10 @@
-﻿using System;
+﻿using ItBlog.Models;
 using System.Collections.Generic;
 using System.Linq;
-using ItBlog.Models;
-using System.Web;
 
 namespace ItBlog.ControllerLogic
 {
-    
+
     public static class DbLogic
     {
         static BlogContext db = new BlogContext();
@@ -32,6 +30,24 @@ namespace ItBlog.ControllerLogic
             Article article=db.Articles.Find(id);
             return article;
         }
+        static public Category GetCategory(int? id)
+        {
+            Category category = db.Categories.Find(id);
+            return category;
+        }
+        static public void DeleteCategory(int? categoryId)
+        {
+            Category category = db.Categories.Find(categoryId);
+            db.Categories.Remove(category);
+            db.SaveChanges();
+            foreach (var b in db.Articles)
+            {
+                if (b.Category == category.CategoryName)
+                    db.Articles.Remove(b);
+            }
+            db.SaveChanges();
+        }
+       
         static public void SetDb(BlogContext Db)
         {
             db = Db;

@@ -1,0 +1,12 @@
+﻿<div style="color:aliceblue">
+@foreach(var b in ViewBag.Categories)
+{
+    <div>
+        <p>@b.CategoryName</p>
+        <p><a href="/Home/EditCategory?id=@b.CategoryId">Edit</a></p>
+        <p><a href="/Home/DeleteCategory?id=@b.CategoryId">Delete</a></p>
+        
+    </div>
+}
+<p><a href="/Home/AddCategory">Add</a></p>
+</div>

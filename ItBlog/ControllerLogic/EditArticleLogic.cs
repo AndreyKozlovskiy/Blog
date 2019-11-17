@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using ItBlog.Models;
+﻿using ItBlog.Models;
+using System;
 
 namespace ItBlog.ControllerLogic
 {

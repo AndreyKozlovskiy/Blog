@@ -84,6 +84,58 @@ namespace ItBlog.Controllers
             int articleId=AddArticleLogic.AddArticle(model, Photo, User.Identity.Name);
             return Redirect($"ShowFull?id={articleId}");
         }
+        [Authorize]
+        [HttpGet]
+        public ActionResult AddCategory()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddCategory(Category model)
+        {
+            string message = AddCategoryLogic.AddCategory(model);
+            return Redirect("ShowCategories");
+        }
+        [Authorize]
+        public ActionResult ShowCategories()
+        {
+            BlogContext blogContext = DbLogic.GetDB();
+            ViewBag.Categories= DbLogic.GetCategories(blogContext);
+            return View();
+        }
+        [Authorize] 
+        [HttpGet]
+        public RedirectResult DeleteCategory(int?id)
+        {
+            DbLogic.DeleteCategory(id);
+            return Redirect("ShowCategories");
+        }
+        [Authorize]
+        [HttpGet]
+        public ActionResult EditCategory(int?id)
+        {
+            if (id == null)
+            {
+                return HttpNotFound();
+            }
+            Category category = DbLogic.GetCategory(id);
+            if (category != null)
+            {
+                return View(category);
+            }
+            return HttpNotFound();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public RedirectResult EditCategory(Category category)
+        {
+            EditCategoryLogic.EditCategory(category);
+
+            return Redirect("ShowCategories");
+        }
         [HttpGet]
         public ActionResult ShowFull(int id)
         {
@@ -95,7 +147,7 @@ namespace ItBlog.Controllers
             ViewBag.Article = article;
             return View();
         }
-
+        
         [HttpPost]
         [Authorize]
         public RedirectResult ShowFull(string textOfComment, int articleId)

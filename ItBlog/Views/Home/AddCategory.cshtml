@@ -1,0 +1,15 @@
+﻿
+@model ItBlog.Models.Category
+
+<div class="form-add_tag">
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Post" class="category-add">
+        <h2 class="head-text">Create new category</h2>
+        <div>
+            <div class="item_formadd">
+                <label>Category</label>
+                @Html.TextBoxFor(m => m.CategoryName)
+            </div>
+            <input type="submit" value="Create" />
+        </div>
+    </form>
+</div>

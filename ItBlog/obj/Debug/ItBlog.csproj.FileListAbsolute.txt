@@ -628,3 +628,5 @@ E:\Blog\Blog\ItBlog\obj\Debug\ItBlog.csprojAssemblyReference.cache
 E:\Blog\Blog\ItBlog\obj\Debug\ItBlog.csproj.CopyComplete
 E:\Blog\Blog\ItBlog\obj\Debug\ItBlog.dll
 E:\Blog\Blog\ItBlog\obj\Debug\ItBlog.pdb
+E:\Blog\Blog\ItBlog\bin\Ninject.dll
+E:\Blog\Blog\ItBlog\bin\Ninject.xml

@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Data.Entity;
 using System.Web.Routing;
 using ItBlog.Models;
+using Ninject.Web.Common;
 
 namespace ItBlog
 {

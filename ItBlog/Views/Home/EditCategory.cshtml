@@ -1,0 +1,15 @@
+﻿
+@model ItBlog.Models.Category
+<div>Edit</div>
+@using (Html.BeginForm("EditCategory", "Home", FormMethod.Post))
+{
+    <fieldset style="color:aliceblue">
+        @Html.HiddenFor(m => m.CategoryId)
+        <p>
+            @Html.LabelFor(m => m.CategoryName, "Category Name")
+            <br />
+            @Html.EditorFor(m => m.CategoryName)
+        </p>
+        <p><input type="submit" value="Edit" /></p>
+    </fieldset>
+}

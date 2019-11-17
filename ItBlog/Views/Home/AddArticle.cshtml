@@ -16,12 +16,9 @@
             <input id="FullDescription" name="FullDescription" type="text" required class="form_input" />
         </div>
         <div class="item_formadd">
-            <select id="TagsList" name="TagsList">
-            @foreach (var i in Model.TagsList)
-            {
-                <option>@i.TagName</option>
-            }
-            </select>
+            <label>Tags(Separate with ' ')</label>
+                @Html.TextBoxFor(m => m.Tags)
+          
         </div>
         <div class=" item_result">
             <div class="item_formadd">

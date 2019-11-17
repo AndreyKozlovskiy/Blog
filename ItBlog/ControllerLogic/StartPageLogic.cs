@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ItBlog.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using ItBlog.Models;
 
 namespace ItBlog.ControllerLogic
 {
