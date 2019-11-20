@@ -1,13 +1,23 @@
 ﻿using ItBlog.Models;
+using ItBlog.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ItBlog.ControllerLogic
 {
 
-    public static class DbLogic
+    public class DbLogic
     {
         static BlogContext db = new BlogContext();
+
+
+        IBlogRepository repo;
+        public DbLogic(IBlogRepository r)
+        {
+            repo = r;
+            db = repo.GetData();
+        }
+
         static public BlogContext GetDB()
         {
             return db;

@@ -630,3 +630,17 @@ E:\Blog\Blog\ItBlog\obj\Debug\ItBlog.dll
 E:\Blog\Blog\ItBlog\obj\Debug\ItBlog.pdb
 E:\Blog\Blog\ItBlog\bin\Ninject.dll
 E:\Blog\Blog\ItBlog\bin\Ninject.xml
+E:\Blog\Blog\ItBlog\bin\Ninject.Web.Common.dll
+E:\Blog\Blog\ItBlog\bin\Ninject.Web.Common.WebHost.dll
+E:\Blog\Blog\ItBlog\bin\Ninject.Web.Mvc.dll
+E:\Blog\Blog\ItBlog\bin\Unity.Abstractions.dll
+E:\Blog\Blog\ItBlog\bin\Unity.Container.dll
+E:\Blog\Blog\ItBlog\bin\Unity.Mvc.dll
+E:\Blog\Blog\ItBlog\bin\WebActivatorEx.dll
+E:\Blog\Blog\ItBlog\bin\Ninject.Web.Common.xml
+E:\Blog\Blog\ItBlog\bin\Ninject.Web.Common.WebHost.xml
+E:\Blog\Blog\ItBlog\bin\Ninject.Web.Mvc.xml
+E:\Blog\Blog\ItBlog\bin\Unity.Abstractions.pdb
+E:\Blog\Blog\ItBlog\bin\Unity.Container.pdb
+E:\Blog\Blog\ItBlog\bin\Unity.Mvc.pdb
+E:\Blog\Blog\ItBlog\bin\Unity.Mvc.xml

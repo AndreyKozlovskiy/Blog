@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using ItBlog.Models;
+using ItBlog.Util;
+using Ninject;
+using Ninject.Modules;
+using Ninject.Web.Mvc;
+using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Optimization;
-using System.Data.Entity;
 using System.Web.Routing;
-using ItBlog.Models;
-using Ninject.Web.Common;
 
 namespace ItBlog
 {
@@ -20,6 +19,10 @@ namespace ItBlog
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            NinjectModule registrations = new NinjectRegistrations();
+            var kernel = new StandardKernel(registrations);
+            DependencyResolver.SetResolver(new NinjectDependencyResolver(kernel));
         }
     }
 }
