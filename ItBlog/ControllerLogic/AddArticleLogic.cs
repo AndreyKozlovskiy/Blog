@@ -20,9 +20,12 @@ namespace ItBlog.ControllerLogic
                 }
             }
             string tagsString = null;
-            foreach (var b in model.TagsList)
+            if (model.TagsList != null)
             {
-                tagsString += b + " ";
+                foreach (var b in model.TagsList)
+                {
+                    tagsString += b + " ";
+                }
             }
             Article article = new Article() { Name = model.Name, FullDescription = model.FullDescription, Tags = tagsString, ShortDescription = model.ShortDescription, Category = model.Category };
             article.Picture = new Picture() { Name = Convert.ToString(article.ArticleId), Image = imageDate, Id = article.ArticleId };

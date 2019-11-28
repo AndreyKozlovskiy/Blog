@@ -10,9 +10,11 @@
 
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="form-group-register">
+
                     @Html.LabelFor(m => m.Email, new { @class = "text-label_login" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form_input-login" })
+
                         @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                     </div>
                 </div>
